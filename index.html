@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram, FaHome, FaBriefcase, FaCode, FaGraduationCap, FaEnvelope } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaInstagram, FaHome, FaBriefcase, FaCode, FaEnvelope, FaCogs } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import "@fontsource/oswald";
 
 const skills = [
   { name: "JavaScript", value: 90 },
@@ -12,18 +13,11 @@ const skills = [
   { name: "Python", value: 70 },
 ];
 
-const academicData = [
-  { degree: "B.Sc. Computer Science", year: "2022", institution: "XYZ University" },
-  { degree: "M.Sc. Software Engineering", year: "2024", institution: "ABC University" },
-  { degree: "High School Diploma", year: "2018", institution: "LMN High School" },
-  { degree: "Certification in AI", year: "2025", institution: "Online Course" },
-];
-
 const navItems = [
   { id: "home", icon: <FaHome /> },
   { id: "projects", icon: <FaBriefcase /> },
   { id: "skills", icon: <FaCode /> },
-  { id: "education", icon: <FaGraduationCap /> },
+  { id: "services", icon: <FaCogs /> },
   { id: "contact", icon: <FaEnvelope /> },
 ];
 
@@ -52,14 +46,14 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative font-['Oswald'] text-[#443627]">
       {/* Floating Navigation Bar */}
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-full p-4 flex gap-4 z-50 transition-all duration-300">
+      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-[#D98324] shadow-lg rounded-full p-4 flex gap-4 z-50 transition-all duration-300">
         {navItems.map((item) => (
           <motion.button
             key={item.id}
             className={`p-3 rounded-full text-lg transition flex items-center justify-center ${
-              activeSection === item.id ? "bg-blue-500 text-white scale-110 shadow-md" : "bg-gray-200"
+              activeSection === item.id ? "bg-[#EFDCAB] text-[#443627] scale-110 shadow-md" : "bg-[#F2F6D0]"
             }`}
             onClick={() => document.getElementById(item.id).scrollIntoView({ behavior: "smooth" })}
             whileHover={{ scale: 1.1 }}
@@ -71,42 +65,51 @@ export default function Portfolio() {
         ))}
       </nav>
 
-      {/* Sections */}
-      <section id="home" className="h-screen flex items-center justify-center bg-blue-100">
-        <h1 className="text-4xl font-bold">Welcome to My Portfolio</h1>
+      {/* Home Section */}
+      <section id="home" className="h-screen flex items-center justify-center bg-[#EFDCAB]">
+        <div className="flex flex-col md:flex-row items-center gap-10">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-medium">Hello, I am</h2>
+            <h1 className="text-5xl font-bold mt-2">Tanesh Sharma</h1>
+            <p className="text-xl font-medium mt-2">Data Analyst, Freelancer, and Educator</p>
+            <button className="mt-4 px-6 py-2 bg-[#D98324] text-white rounded-lg shadow-md hover:bg-[#443627] transition">
+              <a href="" download>Download CV</a>
+            </button>
+          </div>
+          <div className="text-xl font-semibold">Profile Image</div>
+        </div>
       </section>
 
-      <section id="projects" className="h-[75vh] flex items-center justify-center bg-gray-100">
+      <section id="projects" className="h-[75vh] flex flex-col items-center justify-center bg-[#F2F6D0]">
         <h2 className="text-3xl font-semibold">Work & Projects</h2>
+        <div className="w-16 h-1 bg-[#443627] mt-2"></div>
       </section>
 
-      <section id="skills" className="h-[50vh] bg-white flex flex-col items-center py-10">
-        <h2 className="text-3xl font-semibold mb-8">Technical Skills</h2>
+      <section id="skills" className="h-[50vh] bg-[#EFDCAB] flex flex-col items-center py-10 ">
+        <h2 className="text-3xl font-semibold mb-2">Technical Skills</h2>
+        <div className="w-16 h-1 bg-[#443627] mb-6"></div>
         <div className="flex gap-8">
           {skills.map((skill, index) => (
             <div key={index} className="w-24 h-24">
-              <CircularProgressbar value={skill.value} text={`${skill.value}%`} />
+              <CircularProgressbar value={skill.value} text={`${skill.value}%`} styles={{ path: { stroke: "#443627" }, text: { fill: "#443627" } }} />
               <p className="text-center mt-2 text-sm font-semibold">{skill.name}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="education" className="h-[75vh] bg-gray-200 flex flex-col items-center py-10">
-        <h2 className="text-3xl font-semibold mb-8">Academic Qualifications</h2>
-        <ul className="space-y-4">
-          {academicData.map((edu, index) => (
-            <li key={index} className="text-lg font-medium">{edu.degree} - {edu.year} @ {edu.institution}</li>
-          ))}
-        </ul>
+      <section id="services" className="h-[50vh] bg-[#F2F6D0] flex flex-col items-center justify-center py-10">
+        <h2 className="text-3xl font-semibold">Services</h2>
+        <div className="w-16 h-1 bg-[#443627] mt-2"></div>
       </section>
 
-      <section id="contact" className="h-[25vh] bg-blue-200 flex flex-col items-center py-10">
-        <h2 className="text-3xl font-semibold mb-8">Contact Me</h2>
+      <section id="contact" className="h-[25vh] bg-[#2e2e2e] flex flex-col items-center py-10 text-white">
+        <h2 className="text-3xl font-semibold mb-2">Contact Me</h2>
+        <div className="w-16 h-1 bg-white mb-6"></div>
         <div className="flex gap-6">
-          <a href="https://linkedin.com" target="_blank" className="text-3xl text-blue-700"><FaLinkedin /></a>
-          <a href="https://github.com" target="_blank" className="text-3xl text-black"><FaGithub /></a>
-          <a href="https://instagram.com" target="_blank" className="text-3xl text-pink-500"><FaInstagram /></a>
+          <a href="https://linkedin.com" target="_blank" className="text-3xl"><FaLinkedin /></a>
+          <a href="https://github.com" target="_blank" className="text-3xl"><FaGithub /></a>
+          <a href="https://instagram.com" target="_blank" className="text-3xl"><FaInstagram /></a>
         </div>
       </section>
     </div>
