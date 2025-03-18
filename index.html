@@ -1,117 +1,12 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram, FaHome, FaBriefcase, FaCode, FaEnvelope, FaCogs } from "react-icons/fa";
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import "@fontsource/oswald";
-
-const skills = [
-  { name: "JavaScript", value: 90 },
-  { name: "React", value: 85 },
-  { name: "CSS", value: 80 },
-  { name: "Node.js", value: 75 },
-  { name: "Python", value: 70 },
-];
-
-const navItems = [
-  { id: "home", icon: <FaHome /> },
-  { id: "projects", icon: <FaBriefcase /> },
-  { id: "skills", icon: <FaCode /> },
-  { id: "services", icon: <FaCogs /> },
-  { id: "contact", icon: <FaEnvelope /> },
-];
-
-export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState("home");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      let currentSection = "home";
-
-      document.querySelectorAll("section").forEach((section) => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.clientHeight;
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          currentSection = section.id;
-        }
-      });
-
-      setActiveSection(currentSection);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="relative font-['Oswald'] text-[#443627]">
-      {/* Floating Navigation Bar */}
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-[#D98324] shadow-lg rounded-full p-4 flex gap-4 z-50 transition-all duration-300">
-        {navItems.map((item) => (
-          <motion.button
-            key={item.id}
-            className={`p-3 rounded-full text-lg transition flex items-center justify-center ${
-              activeSection === item.id ? "bg-[#EFDCAB] text-[#443627] scale-110 shadow-md" : "bg-[#F2F6D0]"
-            }`}
-            onClick={() => document.getElementById(item.id).scrollIntoView({ behavior: "smooth" })}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.2 }}
-          >
-            {item.icon}
-          </motion.button>
-        ))}
-      </nav>
-
-      {/* Home Section */}
-      <section id="home" className="h-screen flex items-center justify-center bg-[#EFDCAB]">
-        <div className="flex flex-col md:flex-row items-center gap-10">
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-medium">Hello, I am</h2>
-            <h1 className="text-5xl font-bold mt-2">Tanesh Sharma</h1>
-            <p className="text-xl font-medium mt-2">Data Analyst, Freelancer, and Educator</p>
-            <button className="mt-4 px-6 py-2 bg-[#D98324] text-white rounded-lg shadow-md hover:bg-[#443627] transition">
-              <a href="" download>Download CV</a>
-            </button>
-          </div>
-          <div className="text-xl font-semibold">Profile Image</div>
-        </div>
-      </section>
-
-      <section id="projects" className="h-[75vh] flex flex-col items-center justify-center bg-[#F2F6D0]">
-        <h2 className="text-3xl font-semibold">Work & Projects</h2>
-        <div className="w-16 h-1 bg-[#443627] mt-2"></div>
-      </section>
-
-      <section id="skills" className="h-[50vh] bg-[#EFDCAB] flex flex-col items-center py-10 ">
-        <h2 className="text-3xl font-semibold mb-2">Technical Skills</h2>
-        <div className="w-16 h-1 bg-[#443627] mb-6"></div>
-        <div className="flex gap-8">
-          {skills.map((skill, index) => (
-            <div key={index} className="w-24 h-24">
-              <CircularProgressbar value={skill.value} text={`${skill.value}%`} styles={{ path: { stroke: "#443627" }, text: { fill: "#443627" } }} />
-              <p className="text-center mt-2 text-sm font-semibold">{skill.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="services" className="h-[50vh] bg-[#F2F6D0] flex flex-col items-center justify-center py-10">
-        <h2 className="text-3xl font-semibold">Services</h2>
-        <div className="w-16 h-1 bg-[#443627] mt-2"></div>
-      </section>
-
-      <section id="contact" className="h-[25vh] bg-[#2e2e2e] flex flex-col items-center py-10 text-white">
-        <h2 className="text-3xl font-semibold mb-2">Contact Me</h2>
-        <div className="w-16 h-1 bg-white mb-6"></div>
-        <div className="flex gap-6">
-          <a href="https://linkedin.com" target="_blank" className="text-3xl"><FaLinkedin /></a>
-          <a href="https://github.com" target="_blank" className="text-3xl"><FaGithub /></a>
-          <a href="https://instagram.com" target="_blank" className="text-3xl"><FaInstagram /></a>
-        </div>
-      </section>
-    </div>
-  );
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
